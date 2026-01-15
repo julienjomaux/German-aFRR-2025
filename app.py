@@ -20,8 +20,9 @@ capacity prices in Germany for the years 2021–2025.
 
 **Data source:** [Regelleistung.net](https://www.regelleistung.net/)
 
-**More insights:** [GemEnergyAnalytics Substack](https://gemenergyanalytics.substack.com/)  
-**Connect with me:** [LinkedIn – Julien Jomaux](https://www.linkedin.com/in/julien-jomaux/)
+**More insights:** [GEM Energy Analytics](https://gemenergyanalytics.substack.com/)  
+**Connect with me:** [Julien Jomaux](https://www.linkedin.com/in/julien-jomaux/)
+**Email me:** [julien.jomaux@gmail.com](mailto:julien.jomaux@gmail.com)
 """
 )
 # -------------------------------
@@ -335,4 +336,5 @@ if not day_df.empty:
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.info("No data available for the selected date.")
+
 
