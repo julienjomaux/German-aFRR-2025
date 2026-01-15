@@ -109,10 +109,10 @@ def plot_heatmap(data_up, data_dn, title, cbar_label, vmin, vmax,
         cbar=True
     )
 
-    axes[0].set_title('aFRR Upward')
-    axes[1].set_title('aFRR Downward')
-    axes[0].set_xticklabels(product_labels, rotation=45)
-    axes[1].set_xticklabels(product_labels, rotation=45)
+    axes[0].set_xlabel('')
+    axes[1].set_xlabel('')
+    axes[0].set_ylabel('')
+    axes[1].set_ylabel('')
 
     fig.suptitle(title, fontsize=16, fontweight='bold')
     fig.axes[-1].set_ylabel(cbar_label)
@@ -336,6 +336,7 @@ if not day_df.empty:
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.info("No data available for the selected date.")
+
 
 
 
