@@ -293,7 +293,6 @@ st.pyplot(
 )
 
 st.markdown("""---
-*This app presents aFRR capacity price heatmaps for Germany from 2021 to 2025, based on historical capacity auction data.*
 """)
 
 # -------------------------------
@@ -345,6 +344,7 @@ if not day_df.empty:
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.info("No data available for the selected date.")
+
 
 
 
