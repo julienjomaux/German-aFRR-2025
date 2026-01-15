@@ -85,46 +85,49 @@ def build_max_day_annotation(df, products, price_col):
 
 def plot_heatmap(data_up, data_dn, title, cbar_label, vmin, vmax,
                  annot_up=None, annot_dn=None):
-    fig, axes = plt.subplots(ncols=2, figsize=(14, 5), sharey=True)
+    fig, axes = plt.subplots(
+        ncols=2, figsize=(14,5), sharey=True,
+        gridspec_kw={'width_ratios':[1,1]}
+    )
+
+    # Colorbar axis on the right
+    cbar_ax = fig.add_axes([0.92, 0.15, 0.02, 0.7])
 
     sns.heatmap(
-        data_up,
-        ax=axes[0],
+        data_up, ax=axes[0],
         annot=annot_up if annot_up is not None else True,
         fmt='' if annot_up is not None else '.0f',
         cmap='YlOrRd',
-        vmin=vmin,
-        vmax=vmax,
+        vmin=vmin, vmax=vmax,
         cbar=False
     )
 
     sns.heatmap(
-        data_dn,
-        ax=axes[1],
+        data_dn, ax=axes[1],
         annot=annot_dn if annot_dn is not None else True,
         fmt='' if annot_dn is not None else '.0f',
         cmap='YlOrRd',
-        vmin=vmin,
-        vmax=vmax,
-        cbar=True
+        vmin=vmin, vmax=vmax,
+        cbar=True, cbar_ax=cbar_ax
     )
 
-    axes[0].set_xlabel('')
-    axes[1].set_xlabel('')
-    axes[0].set_ylabel('')
-    axes[1].set_ylabel('')
+    # Remove axis labels
+    for ax in axes:
+        ax.set_xlabel('')
+        ax.set_ylabel('')
+
     axes[0].set_xticklabels(product_labels, rotation=45)
     axes[1].set_xticklabels(product_labels, rotation=45)
 
-    # Set the heatmap titles
+    # Heatmap titles
     axes[0].set_title('Upward aFRR', fontsize=14, fontweight='bold')
     axes[1].set_title('Downward aFRR', fontsize=14, fontweight='bold')
-                     
-    fig.suptitle(title, fontsize=16, fontweight='bold')
-    fig.axes[-1].set_ylabel(cbar_label)
-    plt.tight_layout()
-    return fig
 
+    fig.suptitle(title, fontsize=16, fontweight='bold')
+    cbar_ax.set_ylabel(cbar_label)
+
+    plt.tight_layout(rect=[0,0,0.9,1])  # leave space for colorbar
+    return fig
 # -------------------------------
 # 1. Average CAPACITY PRICE
 # -------------------------------
@@ -342,6 +345,7 @@ if not day_df.empty:
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.info("No data available for the selected date.")
+
 
 
 
