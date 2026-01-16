@@ -230,7 +230,13 @@ st.pyplot(
         annot_dn=annot_dn
     )
 )
-
+st.markdown("""
+<span style='font-size:18px; color:#808080;'>
+Made by Julien Jomaux – 
+<a href='https://gemenergyanalytics.substack.com/' target='_blank' style='color:#808080; text-decoration:underline;'>
+GEM Energy Analytics
+</a></span>
+""", unsafe_allow_html=True)
 # -------------------------------
 # 3. Maximal MARGINAL CAPACITY PRICE
 # -------------------------------
@@ -297,9 +303,16 @@ st.pyplot(
     )
 )
 
+
+st.markdown("""
+<span style='font-size:18px; color:#808080;'>
+Made by Julien Jomaux – 
+<a href='https://gemenergyanalytics.substack.com/' target='_blank' style='color:#808080; text-decoration:underline;'>
+GEM Energy Analytics
+</a></span>
+""", unsafe_allow_html=True)
 st.markdown("""---
 """)
-
 # -------------------------------
 # Daily view
 # -------------------------------
@@ -324,14 +337,7 @@ price_type = st.selectbox(
 day_df = df[df['DATE_FROM'].dt.date == selected_day]
 
 if not day_df.empty:
-    all_products = upward_products + downward_products
-    labels = [f"Up {l}" for l in product_labels] + [f"Down {l}" for l in product_labels]
-
-    prices = []
-    for prod in all_products:
-        row = day_df[day_df['PRODUCT'] == prod][price_type]
-        prices.append(float(row.iloc[0]) if not row.empty else float('nan'))
-
+    # ... your previous code
     fig = go.Figure(
         go.Bar(
             x=labels,
@@ -340,15 +346,28 @@ if not day_df.empty:
         )
     )
 
+    # Add large background annotation
+    fig.add_annotation(
+        text="GEM Energy Analytics - Julien Jomaux",
+        xref="paper", yref="paper",
+        x=0.5, y=0.5, showarrow=False,
+        font=dict(size=36, color="rgba(200,200,200,0.3)"),
+        xanchor="center", yanchor="middle"
+    )
+
     fig.update_layout(
         title=f"Capacity Prices for {selected_day.strftime('%d %b %Y')}",
         yaxis_title="Capacity Price (EUR/MW/h)",
         xaxis_title="Product"
     )
-
     st.plotly_chart(fig, use_container_width=True)
+
+    st.markdown("""
+    <span style='font-size:18px; color:#808080;'>Made by Julien Jomaux - gemenergyanalytics.substack.com</span>
+    """, unsafe_allow_html=True)
 else:
     st.info("No data available for the selected date.")
+
 
 
 
