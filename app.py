@@ -90,6 +90,10 @@ def plot_heatmap(data_up, data_dn, title, cbar_label, vmin, vmax,
         gridspec_kw={'width_ratios':[1,1]}
     )
 
+    # Background watermark
+    fig.text(0.5, 0.5, 'GEM Energy Analytics - Julien Jomaux',
+             fontsize=36, color='gray', alpha=0.3, ha='center', va='center', rotation=30, zorder=0)
+
     # Colorbar axis on the right
     cbar_ax = fig.add_axes([0.92, 0.15, 0.02, 0.7])
 
@@ -111,21 +115,16 @@ def plot_heatmap(data_up, data_dn, title, cbar_label, vmin, vmax,
         cbar=True, cbar_ax=cbar_ax
     )
 
-    # Remove axis labels
+    # Axis formatting omitted for brevity...
     for ax in axes:
         ax.set_xlabel('')
         ax.set_ylabel('')
-
     axes[0].set_xticklabels(product_labels, rotation=45)
     axes[1].set_xticklabels(product_labels, rotation=45)
-
-    # Heatmap titles
     axes[0].set_title('Upward aFRR', fontsize=14, fontweight='bold')
     axes[1].set_title('Downward aFRR', fontsize=14, fontweight='bold')
-
     fig.suptitle(title, fontsize=16, fontweight='bold')
     cbar_ax.set_ylabel(cbar_label)
-
     plt.tight_layout(rect=[0,0,0.9,1])  # leave space for colorbar
     return fig
 # -------------------------------
@@ -344,6 +343,7 @@ if not day_df.empty:
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.info("No data available for the selected date.")
+
 
 
 
