@@ -164,7 +164,9 @@ st.pyplot(
         vmax_avg
     )
 )
-
+st.markdown("""
+<span style='font-size:18px; color:#808080;'>Made by Julien Jomaux - gemenergyanalytics.substack.com</span>
+""", unsafe_allow_html=True)
 # -------------------------------
 # 2. Maximal CAPACITY PRICE
 # -------------------------------
@@ -343,6 +345,7 @@ if not day_df.empty:
     st.plotly_chart(fig, use_container_width=True)
 else:
     st.info("No data available for the selected date.")
+
 
 
 
