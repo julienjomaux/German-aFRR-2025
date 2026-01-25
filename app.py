@@ -8,7 +8,7 @@ import os
 import glob
 from typing import Optional, List, Dict
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide", page_icon="GEM.webp")
 st.title("aFRR Capacity Prices in Germany (2021–2025)")
 # -------------------------------
 
@@ -415,6 +415,7 @@ else:
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.info("No data available for the selected date.")
+
 
 
 
