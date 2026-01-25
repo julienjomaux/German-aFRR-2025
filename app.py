@@ -123,7 +123,15 @@ else:
             .reindex(months_order)[products]
         )
         return day_df
-    
+    # ---------- Safe config getter (supports python-decouple and env vars) ----------
+    def get_config_value(key: str, default: Optional[str] = None) -> Optional[str]:
+        # Try python-decouple if available; fallback to environment variables
+        try:
+            from decouple import config as decouple_config  # type: ignore
+            return decouple_config(key, default=default)
+        except Exception:
+            return os.getenv(key, default)
+        
     def plot_heatmap(data_up, data_dn, title, cbar_label, vmin, vmax,
                      annot_up=None, annot_dn=None):
         fig, axes = plt.subplots(
@@ -403,6 +411,7 @@ else:
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.info("No data available for the selected date.")
+
 
 
 
