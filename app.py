@@ -15,7 +15,14 @@ st.title("aFRR Capacity Prices in Germany (2021–2025)")
 # ---------------- Top: Sign-up / Login section ----------------
 stripe_link = get_config_value('STRIPE_CHECKOUT_LINK', '#')
 secret_password = get_config_value('SECRET_PASSWORD', '')
-
+def get_config_value(key: str, default: Optional[str] = None) -> Optional[str]:
+    # Try python-decouple if available; fallback to environment variables
+    try:
+        from decouple import config as decouple_config  # type: ignore
+        return decouple_config(key, default=default)
+    except Exception:
+        return os.getenv(key, default)
+        
 # Description and data source
 # -------------------------------
 st.markdown(
@@ -124,13 +131,7 @@ else:
         )
         return day_df
     # ---------- Safe config getter (supports python-decouple and env vars) ----------
-    def get_config_value(key: str, default: Optional[str] = None) -> Optional[str]:
-        # Try python-decouple if available; fallback to environment variables
-        try:
-            from decouple import config as decouple_config  # type: ignore
-            return decouple_config(key, default=default)
-        except Exception:
-            return os.getenv(key, default)
+
         
     def plot_heatmap(data_up, data_dn, title, cbar_label, vmin, vmax,
                      annot_up=None, annot_dn=None):
@@ -411,6 +412,7 @@ else:
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.info("No data available for the selected date.")
+
 
 
 
