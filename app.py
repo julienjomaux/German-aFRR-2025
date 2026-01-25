@@ -8,6 +8,12 @@ from datetime import date
 st.set_page_config(layout="wide")
 st.title("aFRR Capacity Prices in Germany (2021–2025)")
 # -------------------------------
+
+
+# ---------------- Top: Sign-up / Login section ----------------
+stripe_link = get_config_value('STRIPE_CHECKOUT_LINK', '#')
+secret_password = get_config_value('SECRET_PASSWORD', '')
+
 # Description and data source
 # -------------------------------
 st.markdown(
@@ -33,7 +39,7 @@ st.markdown(
     Currently, the fee is 30 € per month. When the payment is done, you will receive an password that will grant you access to all apps. Every month, you will receive an email with a new password to access the apps (except if you unsubscribe). 
     Feel free to reach out at Julien.jomaux@gmail.com
 
-    [Sign Up Now :metal:]({STRIPE_CHECKOUT_LINK})
+    [Sign Up Now :metal:]({stripe_link})
     """
 )
 
@@ -395,6 +401,7 @@ else:
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.info("No data available for the selected date.")
+
 
 
 
