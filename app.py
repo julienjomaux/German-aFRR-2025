@@ -13,8 +13,7 @@ st.title("aFRR Capacity Prices in Germany (2021–2025)")
 
 
 # ---------------- Top: Sign-up / Login section ----------------
-stripe_link = get_config_value('STRIPE_CHECKOUT_LINK', '#')
-secret_password = get_config_value('SECRET_PASSWORD', '')
+
 def get_config_value(key: str, default: Optional[str] = None) -> Optional[str]:
     # Try python-decouple if available; fallback to environment variables
     try:
@@ -23,6 +22,9 @@ def get_config_value(key: str, default: Optional[str] = None) -> Optional[str]:
     except Exception:
         return os.getenv(key, default)
         
+stripe_link = get_config_value('STRIPE_CHECKOUT_LINK', '#')
+secret_password = get_config_value('SECRET_PASSWORD', '')   
+
 # Description and data source
 # -------------------------------
 st.markdown(
@@ -412,6 +414,7 @@ else:
         st.plotly_chart(fig, use_container_width=True)
     else:
         st.info("No data available for the selected date.")
+
 
 
 
