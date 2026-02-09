@@ -25,24 +25,15 @@ capacity prices in Germany for the years 2021–2025.
 
 **Data source:** Regelleistung.net
 
-**More insights:** GEM Energy Analytics  
+**More insights:** [GEM Energy Analytics](https://gemenergyanalytics.substack.com/)  
 **Connect with me:** Julien Jomaux  
 **Email me:** julien.jomaux@gmail.com
+
+If you want to support, please consider becoming a paying member of [GEM Energy Analytics](https://gemenergyanalytics.substack.com/).
 """
 )
 
-st.markdown(
-    """
-    If you want to access all the apps of GEM Energy Analytics, please sign up following the link below. 
 
-    Currently, the fee is 30 € per month. When the payment is done, you will receive a password 
-    that will grant you access to all apps. Every month, you will receive an email with a new password 
-    to access the apps (except if you unsubscribe). 
-    Feel free to reach out at Julien.jomaux@gmail.com
-
-    Sign Up Now :metal:
-    """
-)
 
 # -------------------------------------------------------------------------
 # 🔓 PAYWALL REMOVED — ALL CONTENT BELOW IS NOW ALWAYS VISIBLE
@@ -369,3 +360,4 @@ if not day_df.empty:
 
 else:
     st.info("No data available for the selected date.")
+
